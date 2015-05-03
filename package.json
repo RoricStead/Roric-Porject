@@ -1,0 +1,34 @@
+{
+  "name": "roricProject",
+  "version": "0.1.0",
+  "description": "A concept saas web application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RoricStead/Roric-Porject.git"
+  },
+  "author": "Eric Chen <erchen123@gmail.com>",
+  "contributors": [
+    {
+      "name": "Rory Sterley",
+      "email": "rorysterley@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RoricStead/Roric-Porject/issues"
+  },
+  "homepage": "https://github.com/RoricStead/Roric-Porject",
+  "dependencies": {
+    "body-parser": "~1.10.1",
+    "cookie-parser": "~1.3.3",
+    "ejs": "~1.0.0",
+    "express": "~4.10.6",
+    "mongoose": "^4.0.2",
+    "serve-favicon": "~2.2.0"
+  }
+}
