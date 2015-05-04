@@ -1,43 +1,45 @@
 'use strict';
 
-// Require ====================================================================
+// REQUIRE ====================================================================
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var routes = require('./config/serverRoutes');
+    //var cookieParser = require('cookie-parser');
     //var favicon = require('serve-favicon');
 
-// configuring our environments ===============================================
+// CONFIGURING OUR ENVIRONMENT ===============================================
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'server/views'));
-app.set('view engine', 'ejs');
-
-// port setup
-app.set('port', process.env.PORT || 6789);
+// SETUP VIEW ENGIN
+app.set('view engine', 'ejs');                           // use ejs to compile 
+app.set('views', path.join(__dirname, 'server/views'));  // set to server/views
+                                                        
+// SETUP STATIC FILE FOLDER
+app.use(express.static(path.join(__dirname, 'public'))); // set to public 
+                                        // set for Angular and Angular-route
+app.use(express.static(path.join(__dirname, 'node_modules/angular')));
+app.use(express.static(path.join(__dirname, 'node_modules/angular-route')));
     
+// SETUP PORT
+app.set('port', process.env.PORT || 6789);               // set port at 6789
+
+// USE BODYPARSER
+app.use(bodyParser.json());                              // handles POST data
+app.use(bodyParser.urlencoded({ extended: false }));     // handles POST data
+    
+    // USE COOKIEPARSER
+    //app.use(cookieParser());                           // handles session
+    //app.use(cookieParser.session( {secret:'ninja'} )); // handles session
+ 
     // uncomment after placing your favicon in /public
-    // app.use(favicon(__dirname + '/public/favicon.ico'));
+    //app.use(favicon(__dirname + '/public/favicon.icon'));
 
-// bodyParser setup
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
-// cookieParser setup
-app.use(cookieParser());
-
-// express static file folder setup
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Routes =====================================================================
-var serverRoutes = express.Router();
-
-serverRoutes(app);
+// ROUTES & MONGOOSE ==========================================================
+require('./config/serverRoutes')(app);          // Route handle by serverRoutes
 
 app.listen(app.get('port'), function() {
     console.log('\n ***************************************************');
-    console.log('*****   Express server listening on port ' + app.get('port') + '   *****');
+    console.log('   Express server listening on port ' + app.get('port'));
     console.log(' ***************************************************\n');
 });

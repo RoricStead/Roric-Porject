@@ -1,7 +1,9 @@
-// Create Angular
-angular.module('demo', []);
+'use strict';
 
-// Configure the Route 'ngRoute'
+// CREATE Angular =============================================================
+angular.module('demo', ['ngRoute']);
+
+// Configure the Route //'ngRoute' 
 // angular.module('demo').config(function($routeProvider) {
 //   $routeProvider
 //     .when('/', {

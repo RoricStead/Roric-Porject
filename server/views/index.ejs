@@ -3,21 +3,59 @@
   <head>
     <meta charset="UTF-8">
     <title><%= title %></title>
+    <!-- LINK - CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/demoStyle.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script> 
+    <!-- SCRIPT - ANGULAR from node_modules -->
+    <script src="/angular.js"></script>
+    <script src="/angular-route.js"></script>
   </head>
-  <body ng-app="demo">
-    <section class="view">
-      <header>
-      </header>
-      
-      <div ng-view></div>
-      
-      <footer>
-      </footer>
-    </section> 
+  <body id="wrapper" ng-app="demo">
+    <section class="innerWrapper">
+
+      <!-- FUTURE -->
+      <!-- <fieldset id="future">
+              <legend> FUTURE HERE!! </legend> -->
+                <!-- Messages -->
+          <!--  <date-wrapper></date-wrapper> 
+                <date-wrapper></date-wrapper> 
+                <date-wrapper></date-wrapper> 
+                <date-wrapper></date-wrapper> 
+                <date-wrapper></date-wrapper> -->
+                <!-- END Messages -->
+      <!--  </fieldset> -->
+
+      <!-- TODAY -->
+      <fieldset id="today">
+        <legend> TODAY HERE!! </legend>
+          <!-- Time BAR -->
+          
+          <!-- Messages -->
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper>
+          <!-- END Messages -->
+      </fieldset>
+
+      <!-- PAST -->
+      <fieldset id="past">
+        <legend> PAST HERE!! </legend>
+          <!-- Messages -->
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper> 
+          <date-wrapper></date-wrapper>
+          <!-- END Messages -->
+      </fieldset>
+    </section>
+    
+    <!-- SCRIPT - jQuery FROM GOOGLE CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="/app.js"></script>
-    <!-- <script type="text/javascript" src="/javascripts/ngControllers/appController.js"></script> -->
+    <!-- SCRIPT - STATIC CONTENT FROM SERVER -->
+    <script src="/app.js"></script>
+    <script src="/javascripts/ngDirectives/demoDirective.js"></script>
+    <!-- <script src="/javascripts/ngControllers/appController.js"></script> -->
+  </body>
 </html>
