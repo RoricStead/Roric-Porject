@@ -1,4 +1,7 @@
-//Create me controller
+'use strict';
+
+//CONTROLLER 'name' ===========================================================
+
 // angular.module('demo').controller('', function(mainFty) {
 
 // })
