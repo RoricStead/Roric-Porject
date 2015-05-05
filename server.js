@@ -37,8 +37,8 @@ app.use(bodyParser.urlencoded({ extended: false }));     // handles POST data
 
 
 // ROUTES & MONGOOSE ==========================================================
-var mongoose = require('./config/mongoose');             // Require mongoose
-var routes = require('./config/serverRoutes')(app);      // Require routes
+require('./config/mongoose');                            // Require mongoose
+require('./config/serverRoutes')(app);                   // Require routes
 
 
 app.listen(app.get('port'), function() {
