@@ -4,6 +4,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var serverRoutes = require('./config/serverRoutes');     // Require routes
     //var cookieParser = require('cookie-parser');
     //var favicon = require('serve-favicon');
 
@@ -36,7 +37,8 @@ app.use(bodyParser.urlencoded({ extended: false }));     // handles POST data
 
 
 // ROUTES & MONGOOSE ==========================================================
-require('./config/serverRoutes')(app);          // Route handle by serverRoutes
+var route = express.Router();
+serverRoutes(route);
 
 app.listen(app.get('port'), function() {
     console.log('\n ***************************************************');
