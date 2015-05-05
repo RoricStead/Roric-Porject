@@ -1,31 +1,30 @@
 'use strict';
 
-// var mongoose = require('mongoose'),
-// env = process.env.NODE_ENV || 'development',
-// config = require('./mongoConfig')[env],
-// fs = require('fs');
+var mongoose = require('mongoose');
+var env = process.env.NODE_ENV || 'mongodb://localhost/temp_dev';
+var fs = require('fs');
 
-// // Bootstrap db connection
-// var connect = function() {
-//   var options = {server: {socketOptions: {keepAlive: 1}}};
-//   mongoose.connect(config.db, options);
-// }
+// BOOTSTRAP DB CONNECTION ====================================================
+var connect = function() {
+  var options = {server: {socketOptions: {keepAlive: 1}}};
+  mongoose.connect(env, options);
+}
 
-// // Connect to mongodb
-// connect();
+// CONNECT TO MONGOOSE ========================================================
+connect();
 
-// // Error handler
-// mongoose.connection.on('error', function(err){
-//   console.log(err);
-// })
+// ERROR HANDLER ==============================================================
+mongoose.connection.on('error', function(err){
+  console.log(err);
+})
 
-// // Reconnect when closed
-// mongoose.connection.on('disconnected', function(){
-//   connect();
-// })
+// RECONNECT WHEN CLOSED ======================================================
+mongoose.connection.on('disconnected', function(){
+  connect();
+})
 
-// // Bootstrap models
-// var models_path = __dirname + '/../server/models';
-// fs.readdirSync(models_path).forEach(function(file){
-//   if (~file.indexOf('.js')) require(models_path + '/' + file);
-// })
+// BOOSTRAP MODELS ============================================================
+var models_path = __dirname + '/../server/models';
+fs.readdirSync(models_path).forEach(function(file){
+  if (~file.indexOf('.js')) require(models_path + '/' + file);
+})
