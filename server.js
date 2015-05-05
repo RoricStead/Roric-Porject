@@ -4,8 +4,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var mongoose = require('./config/mongoose');             // Require mongoose
-var serverRoutes = require('./config/serverRoutes');     // Require routes
+
     //var cookieParser = require('cookie-parser');
     //var favicon = require('serve-favicon');
 
@@ -37,9 +36,10 @@ app.use(bodyParser.urlencoded({ extended: false }));     // handles POST data
     //app.use(favicon(__dirname + '/public/favicon.icon'));
 
 
-// ROUTES ==========================================================
-var route = express.Router();
-serverRoutes(route);
+// ROUTES & MONGOOSE ==========================================================
+var mongoose = require('./config/mongoose');             // Require mongoose
+var routes = require('./config/serverRoutes')(app);      // Require routes
+
 
 app.listen(app.get('port'), function() {
     console.log('\n ***************************************************');
