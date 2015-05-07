@@ -13,28 +13,24 @@
     <section class="innerWrapper">
 
       <!-- FUTURE -->
-      <!-- <fieldset id="future">
-              <legend> FUTURE HERE!! </legend> -->
-                <!-- Messages -->
-          <!--  <date-wrapper></date-wrapper> 
-                <date-wrapper></date-wrapper> 
-                <date-wrapper></date-wrapper> 
-                <date-wrapper></date-wrapper> 
-                <date-wrapper></date-wrapper> -->
-                <!-- END Messages -->
-      <!--  </fieldset> -->
+      <fieldset id="future">
+        <legend> FUTURE HERE!! </legend>
+        <!-- Messages -->
+          <date-wrapper></date-wrapper>       
+        <!-- END Messages -->
+      </fieldset>
 
       <!-- TODAY -->
       <fieldset id="today">
         <legend> TODAY HERE!! </legend>
           <!-- Time BAR -->
-          <time-bar></time-bar>
+          <fieldset class="dateWrapper">
+            <legend>Current Time</legend>
+            <time-bar></time-bar>
+          </fieldset>
+          <!-- END Time Bar -->
           <!-- Messages -->
           <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper>
           <!-- END Messages -->
       </fieldset>
 
@@ -43,10 +39,6 @@
         <legend> PAST HERE!! </legend>
           <!-- Messages -->
           <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper> 
-          <date-wrapper></date-wrapper>
           <!-- END Messages -->
       </fieldset>
     </section>
@@ -55,8 +47,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- SCRIPT - STATIC CONTENT FROM SERVER -->
     <script src="/app.js"></script>
-    <script src="/javascripts/ngDirectives/demoDirective.js"></script>
-    <script src="/javascripts/ngDirectives/clockDirective.js"></script>
+    <script src="/javascripts/ngDirectives/dateWrapperDirective.js"></script>
+    <script src="/javascripts/ngDirectives/timeBarDirective.js"></script>
+    <script src="/javascripts/ngServices/timeProvider.js"></script>
     <!-- <script src="/javascripts/ngControllers/appController.js"></script> -->
   </body>
 </html>
