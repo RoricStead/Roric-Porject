@@ -1,15 +1,16 @@
 'use strict';
 
 // DIRECTIVE 'timeBar' ====================================================
+// inject custom timeFunctions provider for flexibility and re-usability.
 
-angular.module('demo').directive('timeBar', ['dateFilter', '$interval', function(dateFilter, $interval) {
+angular.module('demo').directive('timeBar', ['dateFilter', '$interval', 'timeFunctions', function(dateFilter, $interval, timeFunctions) {
     return {
         restrict:'E',
         link: function(scope, element, attrs) {
-            var format = 'M/d/yy h:mm:ss a';
+            var format = timeFunctions.getFormat();
+            var now = timeFunctions.getTimeNow();
             
             var updateTime = function() {
-                var now = Date.now();
                 element.html(dateFilter(now, format));
             }
 
