@@ -8,10 +8,9 @@ angular.module('demo').directive('timeBar', ['dateFilter', '$interval', 'timeFun
         restrict:'E',
         link: function(scope, element, attrs) {
             var format = timeFunctions.getFormat();
-            var now = timeFunctions.getTimeNow();
             
             var updateTime = function() {
-                element.html(dateFilter(now, format));
+                element.html(dateFilter(timeFunctions.getTimeNow(), format));
             }
 
             $interval(updateTime, 1000);
