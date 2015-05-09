@@ -11,9 +11,6 @@ angular.module('demo').provider('timeFunctions', function timeFunctionsProvider(
         return {
             getFormat: function() {
                 return format;
-            },
-            getTimeNow: function() {
-                return Date.now();
             }
         }
     }
