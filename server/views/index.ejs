@@ -10,7 +10,7 @@
     <script src="/angular-route.js"></script>
   </head>
   <body id="wrapper" ng-app="demo">
-    <section class="innerWrapper">
+    <section class="innerWrapper" ng-controller="mainCtrl as main">
 
       <!-- FUTURE -->
       <!-- <fieldset id="future"> -->
@@ -25,8 +25,8 @@
           <!-- Time BAR -->
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
-            <time-bar></time-bar>
-            <button>+</button>
+            <time-now></time-now>
+            <button ng-click="main.createMsg()">+</button>
           </fieldset>
           <!-- END Time Bar -->
           
@@ -47,8 +47,8 @@
     <!-- SCRIPT - STATIC CONTENT FROM SERVER -->
     <script src="/app.js"></script>
     <script src="/javascripts/ngDirectives/dateWrapperDirective.js"></script>
-    <script src="/javascripts/ngDirectives/timeBarDirective.js"></script>
+    <script src="/javascripts/ngDirectives/timeNowDirective.js"></script>
     <script src="/javascripts/ngServices/timeFunctionsProvider.js"></script>
-    <!-- <script src="/javascripts/ngControllers/appController.js"></script> -->
+    <script src="/javascripts/ngControllers/mainController.js"></script>
   </body>
 </html>
