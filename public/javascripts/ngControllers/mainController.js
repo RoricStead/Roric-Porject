@@ -2,24 +2,18 @@
 
 //CONTROLLER 'name' ===========================================================
 
-angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'timeFunctions', function($scope, $compile, timeFunctions) {
+angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', function($scope, $compile, mainFty) {
     
-    this.createMsg = function() {
-        $scope.currTime = Date.now();
-        var dataWrapperEl = angular.element(document.createElement('date-wrapper'));
-        var compileDatawrapperEl = $compile(dataWrapperEl)($scope)
-        angular.element(document.getElementById('today')).append(compileDatawrapperEl);
+    this.createPost = function() {
+        mainFty.addPost();
+    }
 
+    this.showPosts = function() {
+        return mainFty.retrievePosts();
     }
 }]);
 
-//     this.tab = 1;
-//     this.selectTab = function(setTab) {
-//         this.tab = setTab;
-//     }
-//     this.isSelected = function(checkTab) {
-//         return this.tab === checkTab;
-//     }
-//     this.viewfooterdatas = function() {
-//         return mainFty.getData();
-//     }
+        // $scope.currTime = Date.now();
+        // var dataWrapperEl = angular.element(document.createElement('date-wrapper'));
+        // var compileDatawrapperEl = $compile(dataWrapperEl)($scope)
+        // angular.element(document.getElementById('today')).append(compileDatawrapperEl);
