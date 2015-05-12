@@ -12,12 +12,12 @@
   <body id="wrapper" ng-app="demo">
     <section class="innerWrapper" ng-controller="mainCtrl as main">
 
-      <!-- FUTURE -->
-      <!-- <fieldset id="future"> -->
-        <!-- <legend> DIVIDER HERE!! </legend> -->
-          <!-- Messages -->
-          <!-- END Messages -->
-      <!-- </fieldset> -->
+                        <!-- FUTURE -->
+                        <!-- <fieldset id="future"> -->
+                          <!-- <legend> DIVIDER HERE!! </legend> -->
+                            <!-- Messages -->
+                            <!-- END Messages -->
+                        <!-- </fieldset> -->
 
       <!-- TODAY -->
       <fieldset id="today">
@@ -26,20 +26,21 @@
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
             <time-now></time-now>
-            <button ng-click="main.createMsg()">+</button>
+            <button ng-click="main.createPost()">+</button>
           </fieldset>
           <!-- END Time Bar -->
           
           <!-- Messages -->
+          <date-wrapper ng-repeat="post in main.showPosts()" time="{{post}}"></date-wrapper>
           <!-- END Messages -->
       </fieldset>
 
-      <!-- PAST -->
-      <!-- <fieldset id="past"> -->
-        <!-- <legend> DIVIDER HERE!! </legend> -->
-          <!-- Messages -->
-          <!-- END Messages -->
-       <!-- </fieldset> -->
+                      <!-- PAST -->
+                      <!-- <fieldset id="past"> -->
+                        <!-- <legend> DIVIDER HERE!! </legend> -->
+                          <!-- Messages -->
+                          <!-- END Messages -->
+                       <!-- </fieldset> -->
     </section>
     
     <!-- SCRIPT - jQuery FROM GOOGLE CDN -->
@@ -48,7 +49,8 @@
     <script src="/app.js"></script>
     <script src="/javascripts/ngDirectives/dateWrapperDirective.js"></script>
     <script src="/javascripts/ngDirectives/timeNowDirective.js"></script>
-    <script src="/javascripts/ngServices/timeFunctionsProvider.js"></script>
     <script src="/javascripts/ngControllers/mainController.js"></script>
+    <script src="/javascripts/ngServices/timeFunctionsProvider.js"></script>
+    <script src="/javascripts/ngServices/mainFactory.js"></script>
   </body>
 </html>
