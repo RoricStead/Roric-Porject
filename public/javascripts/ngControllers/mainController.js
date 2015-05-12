@@ -8,9 +8,8 @@ angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', 
         mainFty.addPost();
     }
 
-    this.showPosts = function() {
-        return mainFty.retrievePosts();
-    }
+    this.posts = mainFty.retrievePosts();
+    
 }]);
 
         // $scope.currTime = Date.now();
