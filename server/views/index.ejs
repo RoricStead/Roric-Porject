@@ -26,12 +26,13 @@
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
             <time-now></time-now>
+            <input type="text" ng-model="message"/>
             <button ng-click="main.createPost()">+</button>
           </fieldset>
           <!-- END Time Bar -->
           
           <!-- Messages -->
-          <date-wrapper ng-repeat="post in main.posts" time="{{post}}"></date-wrapper>
+          <date-wrapper ng-repeat="post in main.posts" input-msg="post"></date-wrapper>
           <!-- END Messages -->
       </fieldset>
 

@@ -5,7 +5,7 @@
 angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', function($scope, $compile, mainFty) {
     
     this.createPost = function() {
-        mainFty.addPost();
+        mainFty.addPost($scope.message);
     }
 
     this.posts = mainFty.retrievePosts();
