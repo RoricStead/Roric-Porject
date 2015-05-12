@@ -2,16 +2,18 @@
 
 // FACTORY 'name' =============================================================
 angular.module('demo').factory('mainFty', function() {
-    var timePosts = [];
+    var inputPosts = [];
 
     var factory = {
-        addPost: function() {
-            var currTime = Date.now();
-            timePosts.push(currTime);
+        addPost: function(message) {
+            var onePost = {};
+            onePost.currTime = Date.now();
+            onePost.content = message;
+            inputPosts.push(onePost);
         },
 
         retrievePosts: function() {
-            return timePosts;
+            return inputPosts;
         }
     };
 

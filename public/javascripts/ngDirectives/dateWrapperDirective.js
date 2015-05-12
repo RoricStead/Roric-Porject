@@ -7,7 +7,7 @@ angular.module('demo').directive('dateWrapper', function() {
         restrict:'E',
         replace: true,
         scope: {
-            time: '@'
+            inputMsg: '='
         },
         templateUrl:'templates/dateWrapper.html',
     };
