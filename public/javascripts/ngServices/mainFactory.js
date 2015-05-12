@@ -11,11 +11,7 @@ angular.module('demo').factory('mainFty', function() {
         },
 
         retrievePosts: function() {
-            if(timePosts.length<0){
-                return false;
-            } else {
-                return timePosts;
-            }
+            return timePosts;
         }
     };
 
