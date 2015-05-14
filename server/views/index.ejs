@@ -26,7 +26,15 @@
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
             <time-now></time-now>
-            <input type="text" ng-model="message"/>
+            <input type="text" placeholder="Write Message here" ng-model="message"/>
+            <select ng-options="mm for mm in main.getSelectTime.mms" ng-model="timeSelected.mm">
+            </select> /
+            <input type="text" class="date" placeholder="dd" ng-model="timeSelected.dd"/> /
+            <input type="text" class="date" placeholder="yyyy" ng-model="timeSelected.yyyy"/> /
+            <select ng-options="hour for hour in main.getSelectTime.hours" ng-model="timeSelected.hour">
+            </select> /
+            <select ng-options="minute for minute in main.getSelectTime.minutes" ng-model="timeSelected.minute">
+            </select>
             <button ng-click="main.createPost()">+</button>
           </fieldset>
           <!-- END Time Bar -->

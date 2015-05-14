@@ -4,11 +4,10 @@
 
 angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', function($scope, $compile, mainFty) {
     
-    this.createPost = function() {
-        mainFty.addPost($scope.message);
-    }
-
+    this.getSelectTime = mainFty.retrieveSelectTime();
     this.posts = mainFty.retrievePosts();
+    this.createPost = function() {mainFty.addPost($scope.message, $scope.timeSelected);}
+
     
 }]);
 
