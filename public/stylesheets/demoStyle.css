@@ -12,6 +12,10 @@
 }
 
 .dateWrapper {
-    width: 70%;
+    width: 85%;
     margin: 0 auto;
+}
+
+input.date {
+    width: 5%;
 }
