@@ -6,12 +6,25 @@ angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', 
     
     this.getSelectTime = mainFty.retrieveSelectTime();
     this.posts = mainFty.retrievePosts();
-    this.createPost = function() {mainFty.addPost($scope.message, $scope.timeSelected);}
-
-    
+    // this.todayFuturePosts = mainFty.retrieveTodayFuture();
+    // this.todayPastPosts = mainFty.retrieveTodayPast();
+    this.createPost = function() {
+        console.log($scope.message, $scope.timeSelected);
+        if($scope.message && $scope.timeSelected) {
+            var inputTimeString = Date.parse(
+                $scope.timeSelected.mm +" "+
+                $scope.timeSelected.dd +" "+
+                $scope.timeSelected.yyyy +" "+
+                $scope.timeSelected.hour +":"+
+                $scope.timeSelected.minute);
+            mainFty.addPost($scope.message, inputTimeString);
+            $scope.message='';
+            $scope.timeSelected.dd = '';
+            $scope.timeSelected.yyyy = '';
+        }else if($scope.message) {
+            var currTime = Date.now();
+            mainFty.addPost($scope.message, currTime);
+            $scope.message='';
+        }
+    }
 }]);
-
-        // $scope.currTime = Date.now();
-        // var dataWrapperEl = angular.element(document.createElement('date-wrapper'));
-        // var compileDatawrapperEl = $compile(dataWrapperEl)($scope)
-        // angular.element(document.getElementById('today')).append(compileDatawrapperEl);

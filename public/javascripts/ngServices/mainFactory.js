@@ -2,6 +2,11 @@
 
 // FACTORY 'name' =============================================================
 angular.module('demo').factory('mainFty', function() {
+    // var displayTodayPast = [];
+    // var displayTodayFutur = [];
+    // function insertSort(arrayIn) {
+    //      
+    // }
     var displayPosts = [];
     var selectTime = {
         mms: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
@@ -14,15 +19,26 @@ angular.module('demo').factory('mainFty', function() {
         retrieveSelectTime: function() {
             return selectTime;
         },
-
         addPost: function(inputMessage, selectedTime) {
+            // var compareNow = Date.now();
+            // var onePost = {};
+            // if(selectedTime > compareNow) {
+            //      onePost.inputTIme = selectedTime;
+            //      onePost.content = inputMessage;
+            //      displayTodayFuture.push(onePost);
+            //      insertSort(displayTodayFuture)
+            // } else if (selectedTime <= compareNow) {
+            //      onePost.inputTIme = selectedTime;
+            //      onePost.content = inputMessage;
+            //      displayTodayPast.push(onePost);
+            //      insertSort(displayTodayPast);
+            // }
+        
             var onePost = {};
-            var inputTimeString = selectedTime.mm + " " + selectedTime.dd + " " + selectedTime.yyyy + " " + selectedTime.hour + ":" + selectedTime.minute;
-            onePost.inputTime = Date.parse(inputTimeString);
+            onePost.inputTime = selectedTime;
             onePost.content = inputMessage;
             displayPosts.push(onePost);
         },
-
         retrievePosts: function() {
             return displayPosts;
         }
