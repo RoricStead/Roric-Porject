@@ -22,6 +22,8 @@
       <!-- TODAY -->
       <fieldset id="today">
         <legend> DIVIDER HERE!! </legend>
+          <!-- Today Future Messages -->
+          <!-- <date-wrapper ng-repeat="post in main.todayFuturePosts" input-msg="post"></date-wrapper> -->
           <!-- Time BAR -->
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
@@ -39,8 +41,9 @@
           </fieldset>
           <!-- END Time Bar -->
           
-          <!-- Messages -->
+          <!-- Today Past Messages -->
           <date-wrapper ng-repeat="post in main.posts" input-msg="post"></date-wrapper>
+          <!-- <date-wrapper ng-repeat="post in main.todayPastPosts" input-msg="post"></date-wrapper> -->
           <!-- END Messages -->
       </fieldset>
 
@@ -53,7 +56,7 @@
     </section>
     
     <!-- SCRIPT - jQuery FROM GOOGLE CDN -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/javascripts/jquery-1.11.3.js"></script>
     <!-- SCRIPT - STATIC CONTENT FROM SERVER -->
     <script src="/app.js"></script>
     <script src="/javascripts/ngDirectives/dateWrapperDirective.js"></script>
