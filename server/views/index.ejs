@@ -23,7 +23,8 @@
       <fieldset id="today">
         <legend> DIVIDER HERE!! </legend>
           <!-- Today Future Messages -->
-          <!-- <date-wrapper ng-repeat="post in main.todayFuturePosts" input-msg="post"></date-wrapper> -->
+          <one-post-wrapper ng-repeat="post in main.todayFuturePosts" input-msg="post"></one-post-wrapper>
+          
           <!-- Time BAR -->
           <fieldset class="dateWrapper">
             <legend>Current Time</legend>
@@ -39,11 +40,9 @@
             </select>
             <button ng-click="main.createPost()">+</button>
           </fieldset>
-          <!-- END Time Bar -->
           
           <!-- Today Past Messages -->
-          <date-wrapper ng-repeat="post in main.posts" input-msg="post"></date-wrapper>
-          <!-- <date-wrapper ng-repeat="post in main.todayPastPosts" input-msg="post"></date-wrapper> -->
+          <one-post-wrapper ng-repeat="post in main.todayPastPosts" input-msg="post"></one-post-wrapper>
           <!-- END Messages -->
       </fieldset>
 
@@ -59,7 +58,7 @@
     <script src="/javascripts/jquery-1.11.3.js"></script>
     <!-- SCRIPT - STATIC CONTENT FROM SERVER -->
     <script src="/app.js"></script>
-    <script src="/javascripts/ngDirectives/dateWrapperDirective.js"></script>
+    <script src="/javascripts/ngDirectives/onePostWrapperDirective.js"></script>
     <script src="/javascripts/ngDirectives/timeNowDirective.js"></script>
     <script src="/javascripts/ngControllers/mainController.js"></script>
     <script src="/javascripts/ngServices/timeFunctionsProvider.js"></script>
