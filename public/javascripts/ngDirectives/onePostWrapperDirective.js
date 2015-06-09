@@ -2,13 +2,13 @@
 
 // DIRECTIVE 'dataWrapper' ====================================================
 
-angular.module('demo').directive('dateWrapper', function() {
+angular.module('demo').directive('onePostWrapper', function() {
     return {
         restrict:'E',
         replace: true,
         scope: {
             inputMsg: '='
         },
-        templateUrl:'templates/dateWrapper.html',
+        templateUrl:'templates/onePostWrapper.html',
     };
 });
