@@ -5,8 +5,10 @@
 angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', function($scope, $compile, mainFty) {
     
     this.getSelectTime = mainFty.retrieveSelectTime();
-    this.todayFuturePosts = mainFty.retrieveTodayFuture();
-    this.todayPastPosts = mainFty.retrieveTodayPast();
+    this.fPosts = mainFty.retrieveFuture();
+    this.tFuturePosts = mainFty.retrieveTFuture();
+    this.tPastPosts = mainFty.retrieveTPast();
+    this.pPosts = mainFty.retrievePast();
     this.createPost = function() {
         if($scope.message && $scope.timeSelected) {
             var inputTimeString = Date.parse(

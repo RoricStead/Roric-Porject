@@ -2,36 +2,76 @@
 
 // FACTORY 'name' =============================================================
 angular.module('demo').factory('mainFty', function() {
-    var displayTodayPast = [];
-    var displayTodayFuture = [];
-    function insertSortPast() {
-         var position = -1;
-        
-         for(var i=1, c=displayTodayPast.length; i<c; i++) {
-         var temp = displayTodayPast[i];
-             for(var j=i-1; j>= 0 && displayTodayPast[j].inputTime<temp.inputTime; j--) {
-                 displayTodayPast[j+1]=displayTodayPast[j];
-                 position = j;
-             }          
-             displayTodayPast[position]=temp;
-             position = -1;
-         }
-    }
+    var displayFuture = [];
+    var displayTFuture = [];
+    var displayTPast = [];
+    var displayPast = [];
 
     function insertSortFuture() {
          var position = -1;
         
-         for(var i=1, c=displayTodayFuture.length; i<c; i++) {
-         var temp = displayTodayFuture[i];
-             for(var j=i-1; j>= 0 && displayTodayFuture[j].inputTime<temp.inputTime; j--) {
+         for(var i=1, c=displayFuture.length; i<c; i++) {
+         var temp = displayFuture[i];
+             for(var j=i-1; j>= 0 && displayFuture[j].inputTime<temp.inputTime; j--) {
     
-                 displayTodayFuture[j+1]=displayTodayFuture[j];
+                 displayFuture[j+1]=displayFuture[j];
                  position = j;
              }          
           
-             displayTodayFuture[position]=temp;
+             displayFuture[position]=temp;
              position = -1;
          }
+    }
+    
+    function insertSortTFuture() {
+         var position = -1;
+        
+         for(var i=1, c=displayTFuture.length; i<c; i++) {
+         var temp = displayTFuture[i];
+             for(var j=i-1; j>= 0 && displayTFuture[j].inputTime<temp.inputTime; j--) {
+    
+                 displayTFuture[j+1]=displayTFuture[j];
+                 position = j;
+             }          
+          
+             displayTFuture[position]=temp;
+             position = -1;
+         }
+    }
+   
+    function insertSortTPast() {
+         var position = -1;
+        
+         for(var i=1, c=displayTPast.length; i<c; i++) {
+         var temp = displayTPast[i];
+             for(var j=i-1; j>= 0 && displayTPast[j].inputTime<temp.inputTime; j--) {
+                 displayTPast[j+1]=displayTPast[j];
+                 position = j;
+             }          
+             displayTPast[position]=temp;
+             position = -1;
+         }
+    }
+
+    function insertSortPast() {
+         var position = -1;
+        
+         for(var i=1, c=displayPast.length; i<c; i++) {
+         var temp = displayPast[i];
+             for(var j=i-1; j>= 0 && displayPast[j].inputTime<temp.inputTime; j--) {
+    
+                 displayPast[j+1]=displayPast[j];
+                 position = j;
+             }          
+          
+             displayPast[position]=temp;
+             position = -1;
+         }
+    }
+
+    function compare(timeIn) {
+        var compareTimeIn = new Date(timeIn);
+        return compareTimeIn.getMonth()+compareTimeIn.getDate()+compareTimeIn.getFullYear();
     }
     
     var selectTime = {
@@ -44,11 +84,17 @@ angular.module('demo').factory('mainFty', function() {
         retrieveSelectTime: function() {
             return selectTime;
         },
-        retrieveTodayPast: function() {
-            return displayTodayPast;
+        retrieveFuture: function() {
+            return displayFuture;
         },
-        retrieveTodayFuture: function() {
-            return displayTodayFuture;
+        retrieveTFuture: function() {
+            return displayTFuture;
+        },
+        retrieveTPast: function() {
+            return displayTPast;
+        },
+        retrievePast: function() {
+            return displayPast;
         },
         addPost: function(inputMessage, selectedTime) {
             var compareNow = Date.now();
@@ -57,13 +103,31 @@ angular.module('demo').factory('mainFty', function() {
             if(selectedTime > compareNow) {
                  onePost.inputTime = selectedTime;
                  onePost.content = inputMessage;
-                 displayTodayFuture.push(onePost);
-                 insertSortFuture();
-            } else if (selectedTime <= compareNow) {
+
+                 var compareSelect = compare(selectedTime);
+                 var compareTime = compare(compareNow);
+                 
+                 if (compareSelect === compareTime) {
+                     displayTFuture.push(onePost);
+                     insertSortTFuture();
+                 } else {
+                     displayFuture.push(onePost);
+                     insertSortFuture();
+                 }
+            } else if(selectedTime <= compareNow) {
                  onePost.inputTime = selectedTime;
                  onePost.content = inputMessage;
-                 displayTodayPast.push(onePost);
-                 insertSortPast();
+
+                 var compareSelect = compare(selectedTime);
+                 var compareTime = compare(compareNow);
+                 
+                 if(compareSelect === compareTime) {
+                     displayTPast.push(onePost);
+                     insertSortTPast();
+                 } else {
+                     displayPast.push(onePost);
+                     insertSortPast();
+                 }
             }
         }
     };

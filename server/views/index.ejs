@@ -12,18 +12,19 @@
   <body id="wrapper" ng-app="demo">
     <section class="innerWrapper" ng-controller="mainCtrl as main">
 
-                        <!-- FUTURE -->
-                        <!-- <fieldset id="future"> -->
-                          <!-- <legend> DIVIDER HERE!! </legend> -->
-                            <!-- Messages -->
-                            <!-- END Messages -->
-                        <!-- </fieldset> -->
+      <!-- FUTURE -->
+      <fieldset id="future">
+        <legend> F DIVIDER HERE!! </legend>
+          <!-- Messages -->
+          <one-post-wrapper ng-repeat="post in main.fPosts" input-msg="post"></one-post-wrapper>
+          <!-- END Messages -->
+      </fieldset>
 
       <!-- TODAY -->
       <fieldset id="today">
-        <legend> DIVIDER HERE!! </legend>
+        <legend> T DIVIDER HERE!! </legend>
           <!-- Today Future Messages -->
-          <one-post-wrapper ng-repeat="post in main.todayFuturePosts" input-msg="post"></one-post-wrapper>
+          <one-post-wrapper ng-repeat="post in main.tFuturePosts" input-msg="post"></one-post-wrapper>
           
           <!-- Time BAR -->
           <fieldset class="dateWrapper">
@@ -42,16 +43,17 @@
           </fieldset>
           
           <!-- Today Past Messages -->
-          <one-post-wrapper ng-repeat="post in main.todayPastPosts" input-msg="post"></one-post-wrapper>
+          <one-post-wrapper ng-repeat="post in main.tPastPosts" input-msg="post"></one-post-wrapper>
           <!-- END Messages -->
       </fieldset>
 
-                      <!-- PAST -->
-                      <!-- <fieldset id="past"> -->
-                        <!-- <legend> DIVIDER HERE!! </legend> -->
-                          <!-- Messages -->
-                          <!-- END Messages -->
-                       <!-- </fieldset> -->
+      <!-- PAST -->
+      <fieldset id="past">
+        <legend> P DIVIDER HERE!! </legend>
+          <!-- Messages -->
+          <one-post-wrapper ng-repeat="post in main.pPosts" input-msg="post"></one-post-wrapper>
+          <!-- END Messages -->
+       </fieldset>
     </section>
     
     <!-- SCRIPT - jQuery FROM GOOGLE CDN -->
