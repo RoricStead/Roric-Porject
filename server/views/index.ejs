@@ -9,51 +9,49 @@
     <script src="/angular.js"></script>
     <script src="/angular-route.js"></script>
   </head>
+
   <body id="wrapper" ng-app="demo">
     <section class="innerWrapper" ng-controller="mainCtrl as main">
-
-      <!-- FUTURE -->
-      <fieldset id="future">
-        <legend> F DIVIDER HERE!! </legend>
-          <!-- Messages -->
-          <one-post-wrapper ng-repeat="post in main.fPosts" input-msg="post"></one-post-wrapper>
-          <!-- END Messages -->
+    <!-- FUTURE -->
+      <fieldset ng-repeat="msgs in main.fPosts">
+        <legend ng-bind="msgs.timeObject.valueOf() | date:'MMM/dd/yyyy'"></legend>
+        <one-post-wrapper ng-repeat="post in msgs.messages" input-msg="post"></one-post-wrapper>
       </fieldset>
+    <!-- FUTURE -->
 
-      <!-- TODAY -->
-      <fieldset id="today">
-        <legend> T DIVIDER HERE!! </legend>
-          <!-- Today Future Messages -->
-          <one-post-wrapper ng-repeat="post in main.tFuturePosts" input-msg="post"></one-post-wrapper>
+    <!-- TODAY TODAY TODAY TODAY TODAY TODAY TODAY -->
+      <fieldset>
+        <legend ng-bind="main.getTodayTime | date:'MMM/dd/yyyy'"></legend>
+        <!-- Today Future Messages -->
+        <one-post-wrapper ng-repeat="post in main.tFuturePosts" input-msg="post"></one-post-wrapper>
           
-          <!-- Time BAR -->
-          <fieldset class="dateWrapper">
-            <legend>Current Time</legend>
-            <time-now></time-now>
-            <input type="text" placeholder="Write Message here" ng-model="message"/>
-            <select ng-options="mm for mm in main.getSelectTime.mms" ng-model="timeSelected.mm">
-            </select> /
-            <input type="text" class="date" placeholder="dd" ng-model="timeSelected.dd"/> /
-            <input type="text" class="date" placeholder="yyyy" ng-model="timeSelected.yyyy"/> /
-            <select ng-options="hour for hour in main.getSelectTime.hours" ng-model="timeSelected.hour">
-            </select> /
-            <select ng-options="minute for minute in main.getSelectTime.minutes" ng-model="timeSelected.minute">
-            </select>
-            <button ng-click="main.createPost()">+</button>
-          </fieldset>
+        <!-- Time BAR -->
+        <fieldset>
+          <legend><time-now></time-now></legend>
           
-          <!-- Today Past Messages -->
-          <one-post-wrapper ng-repeat="post in main.tPastPosts" input-msg="post"></one-post-wrapper>
-          <!-- END Messages -->
+          <input type="text" placeholder="Write Message here" ng-model="message"/>
+          <select ng-options="mm for mm in main.getSelectTime.mms" ng-model="timeSelected.mm">
+          </select> /
+          <input type="text" class="date" placeholder="dd" ng-model="timeSelected.dd"/> /
+          <input type="text" class="date" placeholder="yyyy" ng-model="timeSelected.yyyy"/> /
+          <select ng-options="hour for hour in main.getSelectTime.hours" ng-model="timeSelected.hour">
+          </select> /
+          <select ng-options="minute for minute in main.getSelectTime.minutes" ng-model="timeSelected.minute">
+          </select>
+          <button ng-click="main.createPost()">+</button>
+        </fieldset>
+          
+        <!-- Today Past Messages -->
+        <one-post-wrapper ng-repeat="post in main.tPastPosts" input-msg="post"></one-post-wrapper>
       </fieldset>
-
-      <!-- PAST -->
-      <fieldset id="past">
-        <legend> P DIVIDER HERE!! </legend>
-          <!-- Messages -->
-          <one-post-wrapper ng-repeat="post in main.pPosts" input-msg="post"></one-post-wrapper>
-          <!-- END Messages -->
-       </fieldset>
+    <!-- TODAY TODAY TODAY TODAY TODAY TODAY TODAY -->
+      
+    <!-- PAST -->
+      <fieldset ng-repeat="msgs in main.pPosts">
+        <legend ng-bind="msgs.timeObject.valueOf() | date:'MMM/dd/yyyy'"></legend>
+        <one-post-wrapper ng-repeat="post in msgs.messages" input-msg="post"></one-post-wrapper>
+      </fieldset>
+    <!-- PAST -->
     </section>
     
     <!-- SCRIPT - jQuery FROM GOOGLE CDN -->

@@ -1,4 +1,4 @@
 <fieldset class="onePostWrapper">
-    <legend> {{inputMsg.inputTime | date: 'M/d/yy h:mm:ss a'}}</legend>
+    <legend ng-bind="inputMsg.timeObject.valueOf() | date:'h:mm:ss a'"></legend>
     <p> {{inputMsg.content}} </p>
 </fieldset>
