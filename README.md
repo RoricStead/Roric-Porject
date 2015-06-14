@@ -1,6 +1,6 @@
 # Roric-Project
 
-A concept saas web application.
+A concept media platform.
 
 ## Contributors
 
