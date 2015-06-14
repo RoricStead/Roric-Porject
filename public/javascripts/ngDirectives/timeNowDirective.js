@@ -1,6 +1,6 @@
 'use strict';
 
-// DIRECTIVE 'timeBar' ====================================================
+// DIRECTIVE 'timeNow' ====================================================
 // inject custom timeFunctions provider for flexibility and re-usability.
 
 angular.module('demo').directive('timeNow', ['dateFilter', '$timeout', 'timeFunctions', function(dateFilter, $timeout, timeFunctions) {
