@@ -178,17 +178,13 @@ angular.module('demo').factory('mainFty', function() {
             }
         },
         updatePost: function(tbObjectIn) {
-            console.log(tbObjectIn.getHours(),':', tbObjectIn.getMinutes(), "update Post......");
             var tbHMin = tbObjectIn.getHours()+tbObjectIn.getMinutes();
             
             if(displayTFuture.length>0) {
-                console.log('In if tFuture.length.....');
-                console.log(displayTFuture[displayTFuture.length-1].HM, 'displayTFuture Hour + Minute');
-                console.log(tbHMin, 'Time from Time Bar Hour + Minute');
                 for(var i=displayTFuture.length-1, c=0; i>=c; i--){
                     if(displayTFuture[i].HM === tbHMin ){
-                        displayTPast.push(displayTFuture[i].pop());
-                    }    
+                        displayTPast.push(displayTFuture.pop());
+                    } else break;
                 }
                 insertSortTPast();
            }
