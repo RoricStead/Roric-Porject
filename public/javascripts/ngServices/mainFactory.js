@@ -130,9 +130,11 @@ angular.module('demo').factory('mainFty', function() {
             var timeMDY =   selectedTime.getFullYear()+
                             selectedTime.getMonth()+
                             selectedTime.getDay();
-
+            var opHM =      selectedTime.getHours()+
+                            selectedTime.getMinutes();
             var onePost = {};
             onePost.timeObject = selectedTime;
+            onePost.HM = opHM;
             onePost.content = inputMessage;
 
             if(selectedTime.valueOf() > compareNow.valueOf()) {
@@ -174,6 +176,25 @@ angular.module('demo').factory('mainFty', function() {
                     }
                 }
             }
+        },
+        updatePost: function(tbObjectIn) {
+            var tbHMin = tbObjectIn.getHours()+tbObjectIn.getMinutes();
+            
+            if(displayTFuture.length>0) {
+                for(var i=displayTFuture.length-1, c=0; i>=c; i--){
+                    if(displayTFuture[i].HM === tbHMin ){
+                        displayTPast.push(displayTFuture.pop());
+                    } else break;
+                }
+                insertSortTPast();
+           }
+        },
+        updateDate: function(tbObjectIn) {
+            console.log(tbObjectIn.getFullYear(), tbObjectIn.getMonth(), tbObjectIn.getDay(), 'in updateDate.....');
+
+            // var tbMYDin =   tbObjectIn.getFullYear()+
+            //                 tbObjectIn.getMonth()+
+            //                 tbObjectIn.getDay();
         }
     };
 

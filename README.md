@@ -9,5 +9,6 @@ A concept media platform.
 
 ## License
 
-Copyright 2015 Eric Chen & Rory Sterley.
+Copyright 2015 Eric Chen & Rory Sterley
+
 
