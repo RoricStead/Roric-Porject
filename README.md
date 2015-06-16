@@ -9,5 +9,5 @@ A concept media platform.
 
 ## License
 
-MIT: [LICENSE](LICENSE)
+Copyright 2015 Eric Chen & Rory Sterley.
 
