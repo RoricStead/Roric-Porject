@@ -8,7 +8,7 @@ angular.module('demo').factory('mainFty', function() {
     var displayPast = [];
     var selectTime = {
         mms: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
-        hours: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
+        hours: ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
         minutes: ['00','05','10','15','20','25','30','35','40','45','50','55']
     };
 
@@ -99,6 +99,7 @@ angular.module('demo').factory('mainFty', function() {
         data.messages = [];
         var post = {};
         post.timeObject = postIn.timeObject;
+        post.HM = postIn.HM;
         post.content = postIn.content;
         data.messages.push(post);
 
@@ -190,11 +191,35 @@ angular.module('demo').factory('mainFty', function() {
            }
         },
         updateDate: function(tbObjectIn) {
-            console.log(tbObjectIn.getFullYear(), tbObjectIn.getMonth(), tbObjectIn.getDay(), 'in updateDate.....');
+        
+            if(displayTPast.length>0) {
+                var pastPost = displayTPast.pop();
+                var ppMDY = pastPost.timeObject.getFullYear()+
+                            pastPost.timeObject.getMonth()+
+                            pastPost.timeObject.getDay();
+                var pastData = rebuildData(pastPost, ppMDY);
 
-            // var tbMYDin =   tbObjectIn.getFullYear()+
-            //                 tbObjectIn.getMonth()+
-            //                 tbObjectIn.getDay();
+                for(var i=0, c=displayTPast.length; i<c; i++){
+                    pastData.messages.push(displayTPast[i]);
+                }
+                
+                displayTPast=[];
+                pastData.messages = insertSortData(pastData.messages);
+                displayPast.push(pastData);
+                insertSortPast();
+            }
+
+            var tbMYDin =   tbObjectIn.getFullYear()+
+                            tbObjectIn.getMonth()+
+                            tbObjectIn.getDay();
+            
+            var lastFuture = displayFuture[displayFuture.length-1];
+            if(displayFuture.length>0 && lastFuture.MDY === tbMYDin) {
+                lastFuture = displayFuture.pop();
+                for(var i=0, c=lastFuture.messages.length; i<c; i++) {
+                    displayTFuture.push(lastFuture.messages[i]);
+                }
+            }
         }
     };
 
