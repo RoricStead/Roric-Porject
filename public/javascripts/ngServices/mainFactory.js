@@ -131,7 +131,7 @@ angular.module('demo').factory('mainFty', function() {
             var timeMDY =   selectedTime.getFullYear()+
                             selectedTime.getMonth()+
                             selectedTime.getDay();
-            var opHM =      selectedTime.getHours()+
+            var opHM =      (selectedTime.getHours()*100)+
                             selectedTime.getMinutes();
             var onePost = {};
             onePost.timeObject = selectedTime;
@@ -179,11 +179,11 @@ angular.module('demo').factory('mainFty', function() {
             }
         },
         updatePost: function(tbObjectIn) {
-            var tbHMin = tbObjectIn.getHours()+tbObjectIn.getMinutes();
+            var tbHMin = (tbObjectIn.getHours()*100)+tbObjectIn.getMinutes();
             
             if(displayTFuture.length>0) {
                 for(var i=displayTFuture.length-1, c=0; i>=c; i--){
-                    if(displayTFuture[i].HM === tbHMin ){
+                    if(displayTFuture[i].HM <= tbHMin){
                         displayTPast.push(displayTFuture.pop());
                     } else break;
                 }
@@ -217,7 +217,11 @@ angular.module('demo').factory('mainFty', function() {
             if(displayFuture.length>0 && lastFuture.MDY === tbMYDin) {
                 lastFuture = displayFuture.pop();
                 for(var i=0, c=lastFuture.messages.length; i<c; i++) {
-                    displayTFuture.push(lastFuture.messages[i]);
+                    if(lastFuture.messages[i].HM === 0) {
+                        displayTPast.push(lastFuture.messages[i]);
+                    } else {
+                        displayTFuture.push(lastFuture.messages[i]);      
+                    }
                 }
             }
         }
