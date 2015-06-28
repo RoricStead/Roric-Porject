@@ -3,13 +3,16 @@
 var mongoose = require('mongoose');
 
 // CREATE SCHEMA ==============================================================
-var tempSchema = new mongoose.Schema({
-    created_at: {type: Date, default: Date.now}
+var dateSchema = new mongoose.Schema({
+    date: {type:number},
+    MDY: {type:number, unique:true},
+    messages: array
 });
 
-mongoose.model('temp', tempSchema);
+mongoose.model('date', dateSchema);
 
-     // user_name: {type: String},
-     // email_address: {type: String},  
-     // password: {type: String},
-     // message: Array,
+    // created_at: {type: Date, default: Date.now}
+    // user_name: {type: String},
+    // email_address: {type: String},  
+    // password: {type: String},
+    // message: Array,

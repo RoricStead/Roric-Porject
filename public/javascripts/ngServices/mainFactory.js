@@ -18,7 +18,7 @@ angular.module('demo').factory('mainFty', function() {
         
         for(var i=1, c=displayFuture.length; i<c; i++) {
             var temp = displayFuture[i];
-            for(var j=i-1; j>= 0 && displayFuture[j].timeObject.valueOf()<temp.timeObject.valueOf(); j--) {
+            for(var j=i-1; j>= 0 && displayFuture[j].timeObject.getTime()<temp.timeObject.getTime(); j--) {
     
                 displayFuture[j+1]=displayFuture[j];
                 position = j;
@@ -34,7 +34,7 @@ angular.module('demo').factory('mainFty', function() {
         
         for(var i=1, c=displayTFuture.length; i<c; i++) {
             var temp = displayTFuture[i];
-            for(var j=i-1; j>= 0 && displayTFuture[j].timeObject.valueOf()<temp.timeObject.valueOf(); j--) {
+            for(var j=i-1; j>= 0 && displayTFuture[j].timeObject.getTime()<temp.timeObject.getTime(); j--) {
     
                 displayTFuture[j+1]=displayTFuture[j];
                 position = j;
@@ -49,7 +49,7 @@ angular.module('demo').factory('mainFty', function() {
         
         for(var i=1, c=displayTPast.length; i<c; i++) {
             var temp = displayTPast[i];
-            for(var j=i-1; j>= 0 && displayTPast[j].timeObject.valueOf()<temp.timeObject.valueOf(); j--) {
+            for(var j=i-1; j>= 0 && displayTPast[j].timeObject.getTime()<temp.timeObject.getTime(); j--) {
                 displayTPast[j+1]=displayTPast[j];
                 position = j;
             }          
@@ -64,7 +64,7 @@ angular.module('demo').factory('mainFty', function() {
         
         for(var i=1, c=displayPast.length; i<c; i++) {
             var temp = displayPast[i];
-            for(var j=i-1; j>= 0 && displayPast[j].timeObject.valueOf()<temp.timeObject.valueOf(); j--) {
+            for(var j=i-1; j>= 0 && displayPast[j].timeObject.getTime()<temp.timeObject.getTime(); j--) {
     
                 displayPast[j+1]=displayPast[j];
                 position = j;
@@ -80,7 +80,7 @@ angular.module('demo').factory('mainFty', function() {
         
         for(var i=1, c=arrayIn.length; i<c; i++) {
             var temp = arrayIn[i];
-            for(var j=i-1; j>= 0 && arrayIn[j].timeObject.valueOf()<temp.timeObject.valueOf(); j--) {
+            for(var j=i-1; j>= 0 && arrayIn[j].timeObject.getTime()<temp.timeObject.getTime(); j--) {
     
                 arrayIn[j+1]=arrayIn[j];
                 position = j;
@@ -92,10 +92,11 @@ angular.module('demo').factory('mainFty', function() {
         return arrayIn;
     } 
 
-    function rebuildData(postIn, MDYIn) {
+    // Rebuild Data************************************************************
+    function rebuildData(postIn) {
         var data = {};
         data.timeObject = postIn.timeObject;
-        data.MDY = MDYIn;
+        data.MDY = postIn.MDY;
         data.messages = [];
         var post = {};
         post.timeObject = postIn.timeObject;
@@ -125,20 +126,21 @@ angular.module('demo').factory('mainFty', function() {
         },
         addPost: function(inputMessage, selectedTime) {
             var compareNow = new Date();
-            var nowMDY =    compareNow.getFullYear()+
-                            compareNow.getMonth()+
-                            compareNow.getDay();
-            var timeMDY =   selectedTime.getFullYear()+
-                            selectedTime.getMonth()+
-                            selectedTime.getDay();
+            var nowMDY =    compareNow.getFullYear()*10000+
+                            ((compareNow.getMonth()+1)*100)+
+                            compareNow.getDate();
+            var timeMDY =   selectedTime.getFullYear()*10000+
+                            ((selectedTime.getMonth()+1)*100)+
+                            selectedTime.getDate();
             var opHM =      (selectedTime.getHours()*100)+
                             selectedTime.getMinutes();
             var onePost = {};
-            onePost.timeObject = selectedTime;
+            onePost.timeObject = selectedTime; 
+            onePost.MDY = timeMDY;
             onePost.HM = opHM;
             onePost.content = inputMessage;
 
-            if(selectedTime.valueOf() > compareNow.valueOf()) {
+            if(selectedTime.getTime() > compareNow.getTime()) {
                 if(timeMDY === nowMDY) {
                     displayTFuture.push(onePost);
                     insertSortTFuture();
@@ -153,11 +155,11 @@ angular.module('demo').factory('mainFty', function() {
                     }
 
                     if(i === c) {
-                        displayFuture.push(rebuildData(onePost, timeMDY)); 
+                        displayFuture.push(rebuildData(onePost)); 
                         insertSortFuture();
                     }
                 }
-            } else if(selectedTime.valueOf() <= compareNow.valueOf()) {
+            } else if(selectedTime.getTime() <= compareNow.getTime()) {
                 if(timeMDY === nowMDY) {
                     displayTPast.push(onePost);
                     insertSortTPast();
@@ -172,64 +174,84 @@ angular.module('demo').factory('mainFty', function() {
                     }
 
                     if(i === c) {
-                        displayPast.push(rebuildData(onePost, timeMDY));
+                        displayPast.push(rebuildData(onePost));
                         insertSortPast();
                     }
                 }
             }
         },
-        updatePost: function(tbObjectIn) {
-            var tbHMin = (tbObjectIn.getHours()*100)+tbObjectIn.getMinutes();
+        checkPost: function(tbObjectIn) {
+            var tbTime = {};
+            tbTime.MDY =    tbObjectIn.getFullYear()*10000+
+                            ((tbObjectIn.getMonth()+1)*100)+
+                            tbObjectIn.getDate();
+            tbTime.HM =     (tbObjectIn.getHours()*100)+
+                            tbObjectIn.getMinutes();
             
-            if(displayTFuture.length>0) {
-                for(var i=displayTFuture.length-1, c=0; i>=c; i--){
-                    if(displayTFuture[i].HM <= tbHMin){
-                        displayTPast.push(displayTFuture.pop());
-                    } else break;
-                }
-                insertSortTPast();
-           }
-        },
-        updateDate: function(tbObjectIn) {
-        
-            if(displayTPast.length>0) {
-                var pastPost = displayTPast.pop();
-                var ppMDY = pastPost.timeObject.getFullYear()+
-                            pastPost.timeObject.getMonth()+
-                            pastPost.timeObject.getDay();
-                var pastData = rebuildData(pastPost, ppMDY);
+            if(displayTFuture.length > 0 &&
+               displayTFuture[displayTFuture.length-1].MDY === tbTime.MDY) {
+                    for(var i=displayTFuture.length-1, c=0; i>=c; i--){
+                        if(displayTFuture[i].HM <= tbTime.HM){
+                            displayTPast.push(displayTFuture.pop());
+                        } else break;
 
-                for(var i=0, c=displayTPast.length; i<c; i++){
-                    pastData.messages.push(displayTPast[i]);
-                }
-                
-                displayTPast=[];
-                pastData.messages = insertSortData(pastData.messages);
-                displayPast.push(pastData);
-                insertSortPast();
-            }
-
-            var tbMYDin =   tbObjectIn.getFullYear()+
-                            tbObjectIn.getMonth()+
-                            tbObjectIn.getDay();
-            
-            var lastFuture = displayFuture[displayFuture.length-1];
-            if(displayFuture.length>0 && lastFuture.MDY === tbMYDin) {
-                lastFuture = displayFuture.pop();
-                for(var i=0, c=lastFuture.messages.length; i<c; i++) {
-                    if(lastFuture.messages[i].HM === 0) {
-                        displayTPast.push(lastFuture.messages[i]);
-                    } else {
-                        displayTFuture.push(lastFuture.messages[i]);      
+                        insertSortTPast();
                     }
+            }else if(
+                displayTFuture.length > 0 
+                && displayTFuture[displayTFuture.length-1].MDY !== tbTime.MDY 
+                || displayTPast.length > 0
+                && displayTPast[0].MDY !== tbTime.MDY){
+                
+                if(displayTFuture.length >0 ) {
+                    for(var i=displayTFuture.length-1, c=0; i>=c; i--){
+                        displayTPast.push(displayTFuture.pop());
+                    }   
                 }
-            }
+
+                if(displayTPast.length>0) {
+                    var pastPost = displayTPast.pop();
+                    var pastData = rebuildData(pastPost);
+
+                    for(var i=0, c=displayTPast.length; i<c; i++) {
+                        pastData.messages.push(displayTPast.pop());
+                    }
+                    
+                    pastData.messages = insertSortData(pastData.messages);
+                    displayPast.push(pastData);
+                    insertSortPast();
+                }
+            }; 
+
+            if(displayFuture.length > 0 && 
+               displayFuture[displayFuture.length-1].MDY <= tbTime.MDY) {
+
+                if(displayFuture[displayFuture.length-1].MDY < tbTime.MDY) {
+                   for(var i=displayFuture.length-1, c=0; i>= c ; i--){
+                        if(displayFuture[i].MDY < tbTime.MDY) {
+                            displayPast.push(displayFuture.pop());
+                        } else break;
+                    }
+                    insertSortPast;
+                }
+
+                if(displayFuture[displayFuture.length-1].MDY === tbTime.MDY) {
+                    var lastFuture = displayFuture.pop();
+                    for(var i=0, c=lastFuture.messages.length; i<c; i++) {
+                        if(lastFuture.messages[i].HM <= tbTime.HM) {
+                            displayTPast.push(lastFuture.messages[i]);
+                        } else {
+                            displayTFuture.push(lastFuture.messages[i]);
+                        }
+                    }
+                    insertSortTFuture();
+                    insertSortTPast();
+                }  
+            }    
         }
     };
 
     return factory;
 });
-
-
-    
-    
+ 
+           
