@@ -21,7 +21,7 @@
 
     <!-- TODAY TODAY TODAY TODAY TODAY TODAY TODAY -->
       <fieldset>
-        <legend ng-bind="main.getTodayTime | date:'MMM/dd/yyyy'"></legend>
+        <legend ng-bind="getNowTime | date:'MMM/dd/yyyy'"></legend>
         <!-- Today Future Messages -->
         <one-post-wrapper ng-repeat="post in main.tFuturePosts" input-msg="post"></one-post-wrapper>
           

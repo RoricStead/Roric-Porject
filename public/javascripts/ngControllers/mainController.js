@@ -3,8 +3,6 @@
 //CONTROLLER 'mainCtrl' ===========================================================
 
 angular.module('demo').controller('mainCtrl', ['$scope', '$compile', 'mainFty', function($scope, $compile, mainFty) {
-    
-    this.getTodayTime = new Date();
     this.getSelectTime = mainFty.retrieveSelectTime();
     this.fPosts = mainFty.retrieveFuture();
     this.tFuturePosts = mainFty.retrieveTFuture();

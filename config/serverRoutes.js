@@ -5,5 +5,4 @@ module.exports = function Routes(app) {
     
     // DEFAULT ROUTE
     app.get('/', function (req,res) {serverCtrl.index(req,res);});
-
 };
