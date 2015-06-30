@@ -3,13 +3,14 @@
 var mongoose = require('mongoose');
 
 // CREATE SCHEMA ==============================================================
-var dateSchema = new mongoose.Schema({
-    date: {type:number},
-    MDY: {type:number, unique:true},
-    messages: array
+var postSchema = new mongoose.Schema({
+    time: string,
+    timeMDY: number,
+    timeHM: number,
+    messages: string
 });
 
-mongoose.model('date', dateSchema);
+mongoose.model('post', postSchema);
 
     // created_at: {type: Date, default: Date.now}
     // user_name: {type: String},
