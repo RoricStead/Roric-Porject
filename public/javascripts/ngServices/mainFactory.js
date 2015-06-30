@@ -93,16 +93,17 @@ angular.module('demo').factory('mainFty', function() {
     } 
 
     // Rebuild Data************************************************************
-    function rebuildData(postIn) {
-        var data = {};
-        data.timeObject = postIn.timeObject;
-        data.MDY = postIn.MDY;
-        data.messages = [];
+    function rebuildDate(postIn) {
+        var date = {};
+        date.timeObject = postIn.timeObject;
+        date.MDY = postIn.MDY;
+        date.messages = [];
         var post = {};
         post.timeObject = postIn.timeObject;
+        post.MDY = postIn.MDY;
         post.HM = postIn.HM;
         post.content = postIn.content;
-        data.messages.push(post);
+        date.messages.push(post);
 
         return data;
     } //***********************************************************************
